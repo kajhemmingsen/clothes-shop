@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import CheckoutItem from '../../Components/checkout-item/checkout-item-component';
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
+import StripeCheckoutButton from '../../Components/stripe-button/stripe-button-component';
 import './checkout-styles.scss';
 
 const CheckoutPage = ({cartItems, total}) => (
@@ -30,9 +31,16 @@ const CheckoutPage = ({cartItems, total}) => (
                 <CheckoutItem key={cartItem.id} cartItem={cartItem}/>))
         }
 
-        <div className='total'>
-            <span>Total: ${total}</span>
+        <div className='total'>Total: ${total}</div>
+        <div className='test-warning'>
+            *Please use the folling test credit card for payments*
+            <br />
+            4242 4242 4242 4242 - exp: 01/22 - CVV: 123
+            <br />
+            any future date will work as expiry
         </div>
+        <StripeCheckoutButton price={total}/>
+
     </div>
 )
 
